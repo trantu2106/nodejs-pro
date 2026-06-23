@@ -1,0 +1,27 @@
+{
+  "name": "nodejs_pro_code",
+  "version": "1.0.0",
+  "description": "node js pro",
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "homepage": "https://github.com/trantu2106/nodejs-pro#readme",
+  "bugs": {
+    "url": "https://github.com/trantu2106/nodejs-pro/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trantu2106/nodejs-pro.git"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "tran anh tu "
+  },
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
