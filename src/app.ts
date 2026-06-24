@@ -1,20 +1,22 @@
 import express from "express"
-import { clearScreenDown } from "readline";
+import webRoutes from "./routes/web";
+
 require('dotenv').config()
 
 const app = express();
 
-const port = process.env.PORT
+const port = process.env.PORT || 8080
 
-app.get('/',(req,res)=>{
-    res.send("hello world nodemon ")
-})
-app.get('/trananhtu',(req,res)=>{
-    res.send("hello tran anh tu n")
-})
+// config view engine 
+app.set('view engine ', 'ejs')
+app.set('views', __dirname + '/views')
 
+// config routes
+webRoutes(app);
+
+//config static file : images css js 
+app.use(express.static('public'));
 
 app.listen(8080,()=>{
     console.log(`my app is running on port : ${port}`)
-    console.log(`ENV PORT: `, process.env.PORT)
 })
