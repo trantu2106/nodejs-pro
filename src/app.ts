@@ -21,6 +21,7 @@ app.use(express.static('public'));
 // config routes
 webRoutes(app);
 
+
 app.listen(8080, () => {
   console.log(`my app is running on port : ${port}`);
 });
