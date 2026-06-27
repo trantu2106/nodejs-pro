@@ -1,4 +1,5 @@
 import getConnection from '../config/database';
+import { RowDataPacket } from 'mysql2/promise';
 
 const handleCreateUser = async (
   fullName: string,
@@ -7,7 +8,6 @@ const handleCreateUser = async (
 ) => {
   // insert into database
   const connection = await getConnection();
-
   try {
     const sql =
       'INSERT INTO `users`(`name`, `email`, `address`) VALUES (?, ? , ?)';
@@ -33,4 +33,55 @@ const getAllUsers = async () => {
   }
 };
 
-export { handleCreateUser, getAllUsers };
+const handleDeleteUser = async (id: string) => {
+  try {
+    const connection = await getConnection();
+    const sql = 'DELETE FROM `users` WHERE `id` = ? LIMIT 1';
+    const values = [id];
+
+    const [result, fields] = await connection.execute(sql, values);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+const getUserById = async (id: string) => {
+  try {
+    const connection = await getConnection();
+    const sql = 'SELECT * FROM `users` WHERE `id` = ? ';
+    const values = [id];
+    const [result] = await connection.execute<RowDataPacket[]>(sql, values);
+    return result[0];
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+const updateUserById = async (
+  id: string,
+  email: string,
+  address: string,
+  fullName: string
+) => {
+  try {
+    const connection = await getConnection();
+     const sql = 'UPDATE `users` SET `name` = ?, `email`= ? , `address` = ?  WHERE `id` = ? LIMIT 1';
+     const values = [fullName,email,address,id];
+    const [result] = await connection.execute<RowDataPacket[]>(sql, values);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+export {
+  handleCreateUser,
+  getAllUsers,
+  handleDeleteUser,
+  getUserById,
+  updateUserById,
+};
